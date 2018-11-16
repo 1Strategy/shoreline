@@ -7,3 +7,5 @@ curl -X POST -H 'Content-Type: application/json' \
       "region" : "us-west-2", 
       "failOnError" : "FALSE"
     }'
+
+# curl -G 'http://your-neptune-endpoint:8182/loader/ef478d76-d9da-4d94-8ff1-08d9d4863aa5'
