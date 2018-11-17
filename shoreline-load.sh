@@ -8,7 +8,7 @@ curl -X POST -H 'Content-Type: application/json' \
       "failOnError" : "FALSE"
     }'
 
-# curl -G 'http://your-neptune-endpoint:8182/loader/ef478d76-d9da-4d94-8ff1-08d9d4863aa5'
+# curl -G 'http://shoreline.c45ikshrooy3.us-west-2.neptune.amazonaws.com:8182/loader/5632bb8c-f121-4c46-8fca-4eff09a4e67a'
 
 # Set up Gremlin Console
 # sudo yum install java-1.8.0-devel -y
@@ -27,4 +27,27 @@ curl -X POST -H 'Content-Type: application/json' \
 # bin/gremlin.sh
 # :remote connect tinkerpop.server conf/neptune-remote.yaml
 # :remote console
+
+# // How many of each type of vertex are there?
+# g.V().groupCount().by(label)
+# // How many of each type of edge are there?
+# g.E().groupCount().by(label)
+# // Show all users
+# g.V().hasLabel('user')
+
+
+
+# Users connected to a specific service
+# g.V().has('~id', 'ssm').inE().outV()
+# g.V().has('~id', 'ssm').inE('api').outV().hasLabel('user')
+
+
+
+
+# Trial Queries
+# g.V().hasLabel('user').outE()
+# g.V().hasLabel('service').inE()
+
+
+
 # :exit
