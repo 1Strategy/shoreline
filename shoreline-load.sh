@@ -1,7 +1,7 @@
 curl -X POST -H 'Content-Type: application/json' \
     http://shoreline.c45ikshrooy3.us-west-2.neptune.amazonaws.com:8182/loader -d '
     { 
-      "source" : "s3://1s-shoreline/edges", 
+      "source" : "s3://1s-shoreline/", 
       "format" : "csv",  
       "iamRoleArn" : "arn:aws:iam::281782457076:role/shoreline", 
       "region" : "us-west-2", 
@@ -38,16 +38,21 @@ curl -X POST -H 'Content-Type: application/json' \
 
 
 # Users connected to a specific service
-# g.V().has('~id', 'ssm').inE().outV()
-# g.V().has('~id', 'ssm').inE('api').outV().hasLabel('user')
+# g.V().has('~id', 'ssm').inE().outV().dedupe()
+# g.V().has('~id', 'ssm').inE('AwsApiCall').has('Action', 'DescribeKeyPairs')
 
+# Show all users who've used the DescribeKeyPairs api call
+# g.E().has('Action', 'DescribeKeyPairs').outV()
 
+# Show all users who've used the DescribeKeyPairs api call AND the DescribeNatGateways api call
+# g.E().has('Action', 'DescribeKeyPairs').outV().outE().has('Action', 'DescribeNatGateways')
 
+# Show all users with api call weights greater than or equal to 1
+# g.V().outE().filter(values('Weight').is(gte(1.0)))
 
-# Trial Queries
-# g.V().hasLabel('user').outE()
-# g.V().hasLabel('service').inE()
+# g.V().where(out().values('Action').is('DescribeKeyPairs'))
 
-
+# Show all services touched by Justin Iravani
+# g.V().has('~id', 'justiniravani').out().dedupe()
 
 # :exit
