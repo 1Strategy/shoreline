@@ -30,12 +30,12 @@ curl -X POST -H 'Content-Type: application/json' \
 
 # // How many of each type of vertex are there?
 # g.V().groupCount().by(label)
-# // How many of each type of edge are there?
-# g.E().groupCount().by(label)
+
 # // Show all users
 # g.V().hasLabel('user')
 
-
+# // How many of each type of edge are there?
+# g.E().groupCount().by(label)
 
 # Users connected to a specific service
 # g.V().has('~id', 'ssm').inE().outV().dedupe()
